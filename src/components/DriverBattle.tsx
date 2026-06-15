@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import DriverCard from "./DriverCard";
+import TrackBattle from "./TrackBattle";
+import DriverVsView from "./DriverVsView";
 
 type Driver = {
   name: string;
@@ -58,6 +59,8 @@ function DriverBattle() {
   const [driver1, setDriver1] = useState("Lando NORRIS");
   const [driver2, setDriver2] = useState("Oscar PIASTRI");
 
+  const [view, setView] = useState("cards");
+
   useEffect(() => {
     fetch("https://api.openf1.org/v1/drivers?session_key=latest")
       .then((response) => response.json())
@@ -83,6 +86,19 @@ function DriverBattle() {
   return (
     <section className="driver-battle">
       <h2>Driver Battle</h2>
+      <div className="view-switcher">
+        <button
+          onClick={() => setView("cards")}
+        >
+          Driver Cards
+        </button>
+
+        <button
+          onClick={() => setView("track")}
+        >
+          Track Battle
+        </button>
+      </div>
       <div className="battle-selectors">
         <div>
           <h3>Driver 1</h3>
@@ -114,26 +130,35 @@ function DriverBattle() {
       <h3>
         {driver1} ⚔️ {driver2}
       </h3>
-      <div className="driver-cards">
-        {selectedDriver1 && (
-          <DriverCard
-            name={selectedDriver1.name}
-            team={selectedDriver1.team}
-            number={selectedDriver1.number}
-            color={selectedDriver1.color}
-            image={selectedDriver1.image}
-          />
-        )}
-        {selectedDriver2 && (
-          <DriverCard
-            name={selectedDriver2.name}
-            team={selectedDriver2.team}
-            number={selectedDriver2.number}
-            color={selectedDriver2.color}
-            image={selectedDriver2.image}
-          />
-        )}
-      </div>
+      {view === "cards" && selectedDriver1 && selectedDriver2 && (
+        <DriverVsView
+          driver1Name={selectedDriver1.name}
+          driver2Name={selectedDriver2.name}
+          driver1Team={selectedDriver1.team}
+          driver2Team={selectedDriver2.team}
+          driver1Number={selectedDriver1.number}
+          driver2Number={selectedDriver2.number}
+          driver1Color={selectedDriver1.color}
+          driver2Color={selectedDriver2.color}
+          driver1Image={selectedDriver1.image}
+          driver2Image={selectedDriver2.image}
+        />
+      )}
+
+      {view === "track" && (
+        <TrackBattle />
+      )}
+
+      {/* {selectedDriver1 && selectedDriver2 && (
+        <BattleSummary
+          driver1Name={selectedDriver1.name}
+          driver2Name={selectedDriver2.name}
+          driver1Team={selectedDriver1.team}
+          driver2Team={selectedDriver2.team}
+          driver1Number={selectedDriver1.number}
+          driver2Number={selectedDriver2.number}
+        />
+      )} */}
     </section>
   );
 }

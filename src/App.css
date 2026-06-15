@@ -12,7 +12,7 @@ body {
 }
 
 .navbar {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -31,6 +31,7 @@ body {
 
 .nav-links a {
   cursor: pointer;
+  color: #b8b8c7;
 }
 
 .hero {
@@ -72,6 +73,166 @@ p {
   width: 240px;
 }
 
+/* DRIVER BATTLE PAGE */
+
+.driver-battle {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.view-switcher {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.view-switcher button {
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+}
+
+.battle-selectors {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin: 28px 0;
+}
+
+.battle-selectors select {
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+/* DRIVER VS VIEW */
+
+.driver-vs-layout {
+  width: 100%;
+  margin-top: 40px;
+}
+
+.battle-score {
+  font-size: 26px;
+  margin-bottom: 36px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.vs-arena {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 34px;
+}
+
+.driver-side {
+  width: 220px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.driver-side h2 {
+  font-size: 28px;
+  margin: 6px 0;
+}
+
+.driver-number {
+  font-size: 36px;
+  font-weight: 900;
+  margin: 0;
+}
+
+.vs-driver-image {
+  width: 180px;
+  height: 280px;
+  object-fit: contain;
+  object-position: bottom center;
+  flex-shrink: 0;
+}
+
+.center-battle {
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.big-vs {
+  font-size: 72px;
+  font-weight: 900;
+  color: white;
+  text-shadow:
+    0 0 20px #ff3b7d,
+    0 0 45px #ff3b7d,
+    0 0 80px #ff3b7d;
+}
+
+.active-stat-card {
+  width: 220px;
+  padding: 20px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 0 35px rgba(255, 59, 125, 0.2);
+}
+
+.active-stat-card h3 {
+  margin-top: 0;
+}
+
+.stat-result-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.stat-list {
+  margin-top: 28px;
+  display: grid;
+  gap: 12px;
+}
+
+.stat-pill {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #d8d8e5;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  cursor: pointer;
+  display: grid;
+  gap: 6px;
+  font-size: 15px;
+}
+
+.stat-pill strong {
+  color: white;
+  font-size: 17px;
+}
+
+.stat-pill.active {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 59, 125, 0.35),
+    rgba(255, 128, 0, 0.25)
+  );
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 0 22px rgba(255, 59, 125, 0.25);
+}
+
+/* OLD CARD STYLES - still used on homepage */
+
 .driver-cards {
   display: flex;
   justify-content: center;
@@ -81,12 +242,18 @@ p {
 }
 
 .driver-card {
-  width: 250px;
-  padding: 25px;
-  border-radius: 20px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.15);
+  width: 280px;
+  min-height: 360px;
+  padding: 32px;
+  border-radius: 24px;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.02)
+  );
+  border: 2px solid rgba(255, 255, 255, 0.15);
   text-align: center;
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.35);
 }
 
 .driver-image {
@@ -99,3 +266,77 @@ p {
   image-rendering: -webkit-optimize-contrast;
   filter: contrast(1.05) saturate(1.05);
 }
+
+.battle-summary {
+  max-width: 780px;
+  margin: 36px auto 0;
+  padding: 28px;
+  border-radius: 24px;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.025)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  text-align: center;
+}
+
+
+.score-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 18px;
+  padding: 8px 20px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 0 24px rgba(255,59,125,0.2);
+}
+
+.score-box strong {
+  font-size: 34px;
+  color: white;
+}
+
+.final-winner {
+  display: inline-block;
+  margin-bottom: 28px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(255,59,125,0.35), rgba(255,128,0,0.25));
+  border: 1px solid rgba(255,255,255,0.25);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.stat-pill strong {
+  color: white;
+  font-size: 14px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 1100px) {
+  .vs-arena {
+    gap: 18px;
+  }
+
+  .driver-side {
+    width: 190px;
+  }
+
+  .vs-driver-image {
+    width: 150px;
+    height: 240px;
+  }
+
+  .center-battle {
+    width: 210px;
+  }
+
+  .big-vs {
+    font-size: 58px;
+  }
+}
+
