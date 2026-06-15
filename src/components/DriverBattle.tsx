@@ -32,7 +32,6 @@ function DriverBattle() {
     return "#ffffff";
   };
 
-  // Try to get a slightly higher-res version of the headshot
   const upgradeImageQuality = (url: string | null | undefined, size = "4col") => {
     if (!url) return "";
     return url.replace(/\/1col\//, `/${size}/`);
