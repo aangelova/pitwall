@@ -20,7 +20,16 @@ type StatKey =
   | "wins"
   | "pointsPerRace"
   | "pointsBehindLeader"
-  | "winRate";
+  | "winRate"
+  | "podiums"
+  | "top5Finishes"
+  | "top10Finishes"
+  | "dnf"
+  | "dns"
+  | "dsq"
+  | "dnfRate"
+  | "finishRate"
+  | "classifiedFinishes";
 
 function DriverVsView({
   driver1Name,
@@ -112,6 +121,70 @@ function DriverVsView({
       lowerIsBetter: false,
       format: (value: number | null) =>
         value === null ? "No data" : `${value.toFixed(1)}%`,
+    },
+
+    podiums: {
+      label: "🥂 Podiums",
+      d1: driver1Stats?.podiums ?? null,
+      d2: driver2Stats?.podiums ?? null,
+      lowerIsBetter: false,
+      format: (v: number | null) => v === null ? "No data" : `${v}`,
+    },
+    top5Finishes: {
+      label: "🔝 Top 5s",
+      d1: driver1Stats?.top5Finishes ?? null,
+      d2: driver2Stats?.top5Finishes ?? null,
+      lowerIsBetter: false,
+      format: (v: number | null) => v === null ? "No data" : `${v}`,
+    },
+    top10Finishes: {
+      label: "📍 Top 10s",
+      d1: driver1Stats?.top10Finishes ?? null,
+      d2: driver2Stats?.top10Finishes ?? null,
+      lowerIsBetter: false,
+      format: (v: number | null) => v === null ? "No data" : `${v}`,
+    },
+    dnf: {
+      label: "💥 DNFs",
+      d1: driver1Stats?.dnf ?? null,
+      d2: driver2Stats?.dnf ?? null,
+      lowerIsBetter: true,
+      format: (v: number | null) => v === null ? "No data" : `${v}`,
+    },
+    dns: {
+      label: "🚫 DNS",
+      d1: driver1Stats?.dns ?? null,
+      d2: driver2Stats?.dns ?? null,
+      lowerIsBetter: true,
+      format: (v: number | null) => v === null ? "No data" : `${v}`,
+    },
+    dsq: {
+      label: "🚩 DSQs",
+      d1: driver1Stats?.dsq ?? null,
+      d2: driver2Stats?.dsq ?? null,
+      lowerIsBetter: true,
+      format: (v: number | null) => v === null ? "No data" : `${v}`,
+    },
+    dnfRate: {
+      label: "⚠️ DNF Rate",
+      d1: driver1Stats?.dnfRate ?? null,
+      d2: driver2Stats?.dnfRate ?? null,
+      lowerIsBetter: true,
+      format: (v: number | null) => v === null ? "No data" : `${(v * 100).toFixed(1)}%`,
+    },
+    finishRate: {
+      label: "✅ Finish Rate",
+      d1: driver1Stats?.finishRate ?? null,
+      d2: driver2Stats?.finishRate ?? null,
+      lowerIsBetter: false,
+      format: (v: number | null) => v === null ? "No data" : `${(v * 100).toFixed(1)}%`,
+    },
+    classifiedFinishes: {
+      label: "🏁 Classified",
+      d1: driver1Stats?.classifiedFinishes ?? null,
+      d2: driver2Stats?.classifiedFinishes ?? null,
+      lowerIsBetter: false,
+      format: (v: number | null) => v === null ? "No data" : `${v}`,
     },
   };
 
