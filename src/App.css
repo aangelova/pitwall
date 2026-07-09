@@ -315,6 +315,231 @@ p {
   font-size: 14px;
 }
 
+.stat-category-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin: 20px 0 32px;
+}
+
+.stat-category-tabs button {
+  padding: 12px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.08);
+  color: white;
+  cursor: pointer;
+}
+
+.stat-category-tabs button.active {
+  background: linear-gradient(
+    135deg,
+    rgba(255,59,125,0.35),
+    rgba(255,128,0,0.25)
+  );
+
+  box-shadow: 0 0 22px rgba(255,59,125,0.25);
+}
+
+
+.battle-title {
+  margin-bottom: 40px;
+}
+
+.battle-selector-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 34px;
+  margin-bottom: 40px;
+}
+
+.driver-selector-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 300px;
+}
+
+.selector-label {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #9c9cae;
+}
+
+.driver-selector-card select {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+  outline: none;
+}
+
+.driver-selector-card option {
+  color: black;
+}
+
+.selector-vs {
+  font-size: 44px;
+  color: white;
+
+  text-shadow:
+    0 0 15px #ff4b91,
+    0 0 35px #ff4b91;
+}
+
+.view-switcher {
+  margin-top: 10px;
+  margin-bottom: 45px;
+}
+
+.view-switcher button.active {
+  background: linear-gradient(
+    135deg,
+    rgba(255,59,125,.35),
+    rgba(255,128,0,.25)
+  );
+
+  box-shadow: 0 0 18px rgba(255,59,125,.35);
+}
+
+
+/* ---------- DRIVER SELECT ---------- */
+
+.driver-select {
+  position: relative;
+  width: 280px;
+}
+
+.driver-select-button {
+  width: 100%;
+  padding: 18px 20px;
+
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 20px;
+
+  background: rgba(255,255,255,.06);
+  backdrop-filter: blur(18px);
+
+  color: white;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  cursor: pointer;
+
+  transition: .25s;
+}
+
+.driver-select-button:hover {
+  border-color: rgba(255,255,255,.3);
+  transform: translateY(-2px);
+}
+
+.driver-select-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.driver-color {
+  width: 14px;
+  height: 42px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.driver-select-name {
+  font-size: 18px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.driver-select-team {
+  font-size: 13px;
+  color: #a6a6b5;
+  margin-top: 3px;
+  text-align: left;
+}
+
+.driver-arrow {
+  font-size: 14px;
+  opacity: .8;
+}
+
+.driver-dropdown {
+  position: absolute;
+
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+
+  max-height: 360px;
+  overflow-y: auto;
+
+  border-radius: 20px;
+
+  background: #17171f;
+
+  border: 1px solid rgba(255,255,255,.12);
+
+  box-shadow:
+    0 25px 60px rgba(0,0,0,.45);
+
+  z-index: 100;
+}
+
+.driver-option {
+  width: 100%;
+
+  padding: 16px 18px;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  background: transparent;
+  border: none;
+
+  color: white;
+
+  cursor: pointer;
+
+  transition: .2s;
+}
+
+.driver-option:hover {
+  background: rgba(255,255,255,.06);
+}
+
+.driver-option-info {
+  text-align: left;
+}
+
+.driver-option-name {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.driver-option-team {
+  font-size: 13px;
+  color: #9d9dad;
+  margin-top: 2px;
+}
+
+.driver-dropdown::-webkit-scrollbar {
+  width: 8px;
+}
+
+.driver-dropdown::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.2);
+  border-radius: 999px;
+}
+
 /* RESPONSIVE */
 
 @media (max-width: 1100px) {

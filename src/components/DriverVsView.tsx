@@ -31,6 +31,9 @@ type StatKey =
   | "finishRate"
   | "classifiedFinishes";
 
+type StatCategory = "season" | "finishing" | "reliability";
+
+
 function DriverVsView({
   driver1Name,
   driver2Name,
@@ -44,6 +47,7 @@ function DriverVsView({
   driver2Image,
 }: DriverVsViewProps) {
   const [selectedStat, setSelectedStat] = useState<StatKey>("points");
+  const [activeCategory, setActiveCategory] = useState<StatCategory>("season");
   const [revealedStats, setRevealedStats] = useState<StatKey[]>([]);
 
   const [driver1Stats, setDriver1Stats] = useState<SeasonDriverStats | null>(null);
@@ -188,6 +192,32 @@ function DriverVsView({
     },
   };
 
+  const statGroups: Record<StatCategory, StatKey[]> = {
+    season: [
+      "points",
+      "wdcPosition",
+      "wins",
+      "pointsPerRace",
+      "pointsBehindLeader",
+      "winRate",
+    ],
+
+    finishing: [
+      "podiums",
+      "top5Finishes",
+      "top10Finishes",
+      "classifiedFinishes",
+    ],
+
+    reliability: [
+      "dnf",
+      "dns",
+      "dsq",
+      "dnfRate",
+      "finishRate",
+    ],
+  };
+
   const getWinner = (
     d1: number | null,
     d2: number | null,
@@ -261,6 +291,29 @@ function DriverVsView({
         </div>
       )}
 
+      <div className="stat-category-tabs">
+        <button
+          className={activeCategory === "season" ? "active" : ""}
+          onClick={() => setActiveCategory("season")}
+        >
+          🏆 Season
+        </button>
+
+        <button
+          className={activeCategory === "finishing" ? "active" : ""}
+          onClick={() => setActiveCategory("finishing")}
+        >
+          🏁 Finishing
+        </button>
+
+        <button
+          className={activeCategory === "reliability" ? "active" : ""}
+          onClick={() => setActiveCategory("reliability")}
+        >
+          ⚙️ Reliability
+        </button>
+      </div>
+
       <div className="vs-arena">
         <div className="driver-side left">
           <p className="driver-number" style={{ color: driver1Color }}>
@@ -270,7 +323,7 @@ function DriverVsView({
           <p>{driver1Team}</p>
 
           <div className="stat-list">
-            {statKeys.map((key) => {
+            {statGroups[activeCategory].map((key) => {
               const isRevealed = revealedStats.includes(key);
 
               return (
@@ -343,7 +396,7 @@ function DriverVsView({
           <p>{driver2Team}</p>
 
           <div className="stat-list">
-            {statKeys.map((key) => {
+            {statGroups[activeCategory].map((key) => {
               const isRevealed = revealedStats.includes(key);
 
               return (

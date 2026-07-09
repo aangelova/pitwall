@@ -1,14 +1,8 @@
 import { useEffect, useState } from "react";
 import TrackBattle from "./TrackBattle";
 import DriverVsView from "./DriverVsView";
-
-type Driver = {
-  name: string;
-  team: string;
-  number: number;
-  color: string;
-  image: string;
-};
+import type { Driver } from "../types/Driver";
+import DriverSelect from "./DriverSelect";
 
 type OpenF1Driver = {
   full_name: string;
@@ -38,6 +32,42 @@ function DriverBattle() {
     return url.replace(/\/1col\//, `/${size}/`);
   };
 
+  type OpenF1Session = {
+    session_key: number;
+  };
+
+  async function getDrivers(): Promise<OpenF1Driver[]> {
+    // 1. Try latest session
+    try {
+      const response = await fetch("/openf1/drivers?session_key=latest");
+
+      if (response.ok) {
+        return await response.json();
+      }
+    } catch {}
+
+    // 2. Fallback: latest race session of the latest meeting
+    const sessions: OpenF1Session[] = await fetch(
+      "/openf1/sessions?meeting_key=latest&session_type=Race"
+    ).then((r) => r.json());
+
+    if (!sessions.length) {
+      throw new Error("No race sessions found.");
+    }
+
+    const sessionKey = sessions[sessions.length - 1].session_key;
+
+    const response = await fetch(
+      `/openf1/drivers?session_key=${sessionKey}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Couldn't load drivers.");
+    }
+
+    return response.json();
+  }
+
   const fallbackDrivers: Driver[] = [
     {
       name: "Lando NORRIS",
@@ -62,9 +92,8 @@ function DriverBattle() {
   const [view, setView] = useState("cards");
 
   useEffect(() => {
-    fetch("https://api.openf1.org/v1/drivers?session_key=latest")
-      .then((response) => response.json())
-      .then((data: OpenF1Driver[]) => {
+    getDrivers()
+      .then((data) => {
         const formattedDrivers: Driver[] = data.map((driver) => ({
           name: driver.full_name,
           team: driver.team_name,
@@ -72,7 +101,11 @@ function DriverBattle() {
           color: getTeamColor(driver.team_name),
           image: upgradeImageQuality(driver.headshot_url),
         }));
+
         setDrivers(formattedDrivers);
+      })
+      .catch((error) => {
+        console.error("Failed to load drivers:", error);
       });
   }, []);
 
@@ -85,51 +118,47 @@ function DriverBattle() {
 
   return (
     <section className="driver-battle">
-      <h2>Driver Battle</h2>
+      <h2 className="battle-title">Driver Battle</h2>
+
+      <div className="battle-selector-row">
+        <div className="driver-selector-card">
+          <span className="selector-label">Driver</span>
+
+          <DriverSelect
+            drivers={drivers}
+            value={driver1}
+            onChange={setDriver1}
+          />
+        </div>
+
+        <div className="selector-vs">⚔️</div>
+
+        <div className="driver-selector-card">
+          <span className="selector-label">Driver</span>
+
+          <DriverSelect
+            drivers={drivers}
+            value={driver2}
+            onChange={setDriver2}
+          />
+        </div>
+      </div>
+
       <div className="view-switcher">
         <button
+          className={view === "cards" ? "active" : ""}
           onClick={() => setView("cards")}
         >
           Driver Cards
         </button>
 
         <button
+          className={view === "track" ? "active" : ""}
           onClick={() => setView("track")}
         >
           Track Battle
         </button>
       </div>
-      <div className="battle-selectors">
-        <div>
-          <h3>Driver 1</h3>
-          <select
-            value={driver1}
-            onChange={(event) => setDriver1(event.target.value)}
-          >
-            {drivers.map((driver) => (
-              <option key={driver.number} value={driver.name}>
-                {driver.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <h3>Driver 2</h3>
-          <select
-            value={driver2}
-            onChange={(event) => setDriver2(event.target.value)}
-          >
-            {drivers.map((driver) => (
-              <option key={driver.number} value={driver.name}>
-                {driver.name}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
-      <h3>
-        {driver1} ⚔️ {driver2}
-      </h3>
       {view === "cards" && selectedDriver1 && selectedDriver2 && (
         <DriverVsView
           driver1Name={selectedDriver1.name}
