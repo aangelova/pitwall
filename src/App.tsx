@@ -3,6 +3,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import "./App.css";
 import FeatureCard from "./components/FeatureCard";
 import DriverBattle from "./components/DriverBattle";
+import About from "./components/About";
 
 function HomePage() {
   return (
@@ -49,13 +50,14 @@ function App() {
           <Link to="/">Home</Link>
           <a>Dashboard</a>
           <Link to="/driver-battle">Driver Battle</Link>
-          <a>About</a>
+          <Link to="/about">About</Link>
         </div>
       </nav>
 
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/driver-battle" element={<DriverBattle />} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </main>
   );
