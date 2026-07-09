@@ -169,20 +169,6 @@ function DriverVsView({
       lowerIsBetter: true,
       format: (v: number | null) => v === null ? "No data" : `${v}`,
     },
-    dnfRate: {
-      label: "⚠️ DNF Rate",
-      d1: driver1Stats?.dnfRate ?? null,
-      d2: driver2Stats?.dnfRate ?? null,
-      lowerIsBetter: true,
-      format: (v: number | null) => v === null ? "No data" : `${(v * 100).toFixed(1)}%`,
-    },
-    finishRate: {
-      label: "✅ Finish Rate",
-      d1: driver1Stats?.finishRate ?? null,
-      d2: driver2Stats?.finishRate ?? null,
-      lowerIsBetter: false,
-      format: (v: number | null) => v === null ? "No data" : `${(v * 100).toFixed(1)}%`,
-    },
     classifiedFinishes: {
       label: "🏁 Classified",
       d1: driver1Stats?.classifiedFinishes ?? null,
@@ -213,8 +199,6 @@ function DriverVsView({
       "dnf",
       "dns",
       "dsq",
-      "dnfRate",
-      "finishRate",
     ],
   };
 
