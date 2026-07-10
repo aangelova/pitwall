@@ -1,39 +1,41 @@
+import { useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 
 import "./App.css";
 import FeatureCard from "./components/FeatureCard";
 import DriverBattle from "./components/DriverBattle";
 import About from "./components/About";
+import StartLights from "./components/StartLights";
 
 function HomePage() {
   return (
     <section className="hero">
-      <div className="badge">F1 DATA PROJECT</div>
+      <div className="badge">FOR F1 FANS, BY AN F1 FAN</div>
 
       <h1>PitWall</h1>
 
       <p>
-        Formula 1 analytics dashboard for race weekends, lap times, weather,
-        and driver battles.
+        Explore Formula 1 through interactive driver battles, detailed
+        statistics, and unique fan experiences built with real racing data.
       </p>
 
       <div className="cards">
         <FeatureCard
-          icon="🏁"
-          title="Race Dashboard"
-          description="Explore sessions, lap times, weather, and race control messages."
-        />
-
-        <FeatureCard
           icon="⚔️"
           title="Driver Battle"
-          description="Compare two drivers through interactive battle views."
+          description="Compare any two Formula 1 drivers using real season statistics and see who comes out on top."
         />
 
         <FeatureCard
-          icon="📊"
-          title="Session Analytics"
-          description="Turn raw F1 data into clean charts and useful insights."
+          icon="🏎️"
+          title="Track Battle"
+          description="Coming soon — compare Formula 1 circuits by speed, layout, history and racing characteristics."
+        />
+
+        <FeatureCard
+          icon="👀"
+          title="Secret Paddock"
+          description="Not everything is visible at first glance..."
         />
       </div>
     </section>
@@ -41,14 +43,23 @@ function HomePage() {
 }
 
 function App() {
+  const [introFinished, setIntroFinished] = useState(false);
+
+  if (!introFinished) {
+    return (
+      <StartLights
+        onFinish={() => setIntroFinished(true)}
+      />
+    );
+  }
+
   return (
     <main className="app">
       <nav className="navbar">
-        <h2>PitWall</h2>
+        <h2>🏎️ PitWall</h2>
 
         <div className="nav-links">
           <Link to="/">Home</Link>
-          <a>Dashboard</a>
           <Link to="/driver-battle">Driver Battle</Link>
           <Link to="/about">About</Link>
         </div>

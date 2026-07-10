@@ -1,20 +1,22 @@
 function TrackBattle() {
   return (
-    <div className="track-battle">
-      <h2>Track Battle</h2>
+    <section className="coming-soon">
+      <div className="coming-soon-icon">🏁</div>
 
-      <div className="track">
-        <div className="start-line">START</div>
+      <p className="coming-soon-label">IN DEVELOPMENT</p>
 
-        <div className="lane">
-          <span className="car">🏎️</span>
-        </div>
+      <h2>Track Battle is coming soon.</h2>
 
-        <div className="lane">
-          <span className="car">🏎️</span>
-        </div>
+      <p className="coming-soon-text">
+        I’m still figuring out how chaotic this feature should be.
+        Expect speed, questionable decisions and at least one unnecessary animation.
+      </p>
+
+      <div className="coming-soon-status">
+        <span className="status-dot" />
+        Currently somewhere between an idea and a feature
       </div>
-    </div>
+    </section>
   );
 }
 
