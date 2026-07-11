@@ -6,6 +6,7 @@ import FeatureCard from "./components/FeatureCard";
 import DriverBattle from "./components/DriverBattle";
 import About from "./components/About";
 import StartLights from "./components/StartLights";
+import SecretPaddockCard from "./components/SecretPaddockCard";
 
 function HomePage() {
   return (
@@ -32,11 +33,7 @@ function HomePage() {
           description="Coming soon — compare Formula 1 circuits by speed, layout, history and racing characteristics."
         />
 
-        <FeatureCard
-          icon="👀"
-          title="Secret Paddock"
-          description="Not everything is visible at first glance..."
-        />
+        <SecretPaddockCard />
       </div>
     </section>
   );
