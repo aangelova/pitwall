@@ -111,7 +111,7 @@ function SecretPaddockCard() {
               </>
             ) : (
               <>
-                <h2>Toto says no.</h2>
+                <h2 className="toto-no">Toto says no.</h2>
 
                 <p>
                   Apparently girls only watch Formula 1

@@ -1148,6 +1148,13 @@ p {
   animation:shake .45s;
 }
 
+.toto-no {
+  color: #ff4d4d;
+  text-shadow:
+    0 0 10px rgba(255, 77, 77, 0.6),
+    0 0 25px rgba(255, 77, 77, 0.3);
+}
+
 @keyframes fadeIn{
   from{
     opacity:0;
