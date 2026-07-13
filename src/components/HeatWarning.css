@@ -1,0 +1,109 @@
+.warning-screen{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    background:
+        radial-gradient(
+            circle at top,
+            #351652,
+            #0b0b10 58%
+        );
+
+    animation:backgroundMove 12s ease-in-out infinite;
+    backdrop-filter:blur(18px);
+    z-index:9999;
+}
+
+@keyframes pulseGlow{
+    0%,100%{
+        transform:scale(1);
+        opacity:.15;
+    }
+
+    50%{
+        transform:scale(1.08);
+        opacity:.28;
+    }
+}
+
+
+.warning-screen::before{
+    content:"";
+    position:absolute;
+    width:700px;
+    height:700px;
+    border-radius:50%;
+    background:#7b5cff;
+    opacity:.10;
+    filter:blur(180px);
+    animation:pulseGlow 3s ease-in-out infinite;
+}
+
+.warning-box{
+    width:min(420px,90vw);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+    background:transparent;
+    border:none;
+    padding:0;
+}
+
+.warning-box h1{
+    font-size:3rem;
+    font-weight:600;
+    margin:20px 0 12px;
+    color:white;
+}
+
+.warning-box p{
+    font-size:1.35rem;
+    line-height:1.45;
+    color:rgba(255,255,255,.8);
+    margin:0 0 60px;
+}
+
+.warning-icon{
+    font-size:4.8rem;
+    margin-bottom:10px;
+}
+
+.continue-btn{
+    min-width:280px;
+    padding:18px 36px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.18);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(145,90,255,.25),
+            rgba(255,255,255,.08)
+        );
+
+    backdrop-filter:blur(35px);
+    -webkit-backdrop-filter:blur(35px);
+    color:white;
+    box-shadow:
+        inset 0 1px 1px rgba(255,255,255,.22),
+        0 0 40px rgba(159,122,234,.25);
+
+    transition:.25s;
+}
+
+.continue-btn:hover{
+    transform:translateY(-2px);
+    background:
+        linear-gradient(
+            rgba(255,255,255,.18),
+            rgba(255,255,255,.08)
+        );
+
+    box-shadow:
+        inset 0 1px 1px rgba(255,255,255,.3),
+        0 0 55px rgba(159,122,234,.45);
+}
+

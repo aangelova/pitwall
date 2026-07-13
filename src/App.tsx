@@ -7,6 +7,8 @@ import DriverBattle from "./components/DriverBattle";
 import About from "./components/About";
 import StartLights from "./components/StartLights";
 import SecretPaddockCard from "./components/SecretPaddockCard";
+import RacingLine from "./components/RacingLine";
+import SecretPaddock from "./components/SecretPaddock";
 
 function HomePage() {
   return (
@@ -52,6 +54,9 @@ function App() {
 
   return (
     <main className="app">
+
+      <RacingLine />
+
       <nav className="navbar">
         <h2>🏎️ PitWall</h2>
 
@@ -66,6 +71,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/driver-battle" element={<DriverBattle />} />
         <Route path="/about" element={<About />} />
+        <Route path="/secret-paddock" element={<SecretPaddock />} />
       </Routes>
     </main>
   );
