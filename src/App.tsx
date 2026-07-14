@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { Link, Route, Routes } from "react-router-dom";
+import {
+  Link,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 
 import "./App.css";
 import FeatureCard from "./components/FeatureCard";
@@ -13,13 +18,16 @@ import SecretPaddock from "./components/SecretPaddock";
 function HomePage() {
   return (
     <section className="hero">
-      <div className="badge">FOR F1 FANS, BY AN F1 FAN</div>
+      <div className="badge">
+        FOR F1 FANS, BY AN F1 FAN
+      </div>
 
       <h1>PitWall</h1>
 
       <p>
-        Explore Formula 1 through interactive driver battles, detailed
-        statistics, and unique fan experiences built with real racing data.
+        Explore Formula 1 through interactive driver battles,
+        detailed statistics, and unique fan experiences built
+        with real racing data.
       </p>
 
       <div className="cards">
@@ -44,6 +52,11 @@ function HomePage() {
 function App() {
   const [introFinished, setIntroFinished] = useState(false);
 
+  const location = useLocation();
+
+  const insideSecretPaddock =
+    location.pathname === "/secret-paddock";
+
   if (!introFinished) {
     return (
       <StartLights
@@ -53,25 +66,44 @@ function App() {
   }
 
   return (
-    <main className="app">
-
+    <main
+      className={`app ${
+        insideSecretPaddock ? "secret-mode" : ""
+      }`}
+    >
       <RacingLine />
 
-      <nav className="navbar">
-        <h2>🏎️ PitWall</h2>
+      {!insideSecretPaddock && (
+        <nav className="navbar">
+          <h2>🏎️ PitWall</h2>
 
-        <div className="nav-links">
-          <Link to="/">Home</Link>
-          <Link to="/driver-battle">Driver Battle</Link>
-          <Link to="/about">About</Link>
-        </div>
-      </nav>
+          <div className="nav-links">
+            <Link to="/">Home</Link>
+            <Link to="/driver-battle">
+              Driver Battle
+            </Link>
+            <Link to="/about">About</Link>
+          </div>
+        </nav>
+      )}
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/driver-battle" element={<DriverBattle />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/secret-paddock" element={<SecretPaddock />} />
+
+        <Route
+          path="/driver-battle"
+          element={<DriverBattle />}
+        />
+
+        <Route
+          path="/about"
+          element={<About />}
+        />
+
+        <Route
+          path="/secret-paddock"
+          element={<SecretPaddock />}
+        />
       </Routes>
     </main>
   );

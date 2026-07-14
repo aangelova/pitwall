@@ -1,16 +1,65 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import collage from "../assets/homepage.jpg";
 import BuildPodium from "./BuildPodium";
+import CreatorRanking from "./CreatorRanking";
+
+type SecretScreen =
+  | "menu"
+  | "podium"
+  | "creator";
 
 function SecretPaddock() {
-  const [screen, setScreen] = useState<"menu" | "podium">("menu");
+  const navigate = useNavigate();
+
+  const [screen, setScreen] =
+    useState<SecretScreen>("menu");
 
   if (screen === "podium") {
-    return <BuildPodium />;
+    return (
+      <div className="secret-feature-screen">
+        <button
+          type="button"
+          className="secret-back"
+          onClick={() => setScreen("menu")}
+        >
+          ← Secret Paddock
+        </button>
+
+        <BuildPodium />
+      </div>
+    );
+  }
+
+  if (screen === "creator") {
+    return (
+      <div className="secret-feature-screen">
+        <button
+          type="button"
+          className="secret-back"
+          onClick={() => setScreen("menu")}
+        >
+          ← Secret Paddock
+        </button>
+
+        <CreatorRanking />
+      </div>
+    );
   }
 
   return (
     <section className="secret-home">
+      <button
+        type="button"
+        className="secret-exit"
+        onClick={() => navigate("/")}
+        aria-label="Exit Secret Paddock"
+        title="Return to PitWall"
+      >
+        ←
+      </button>
+
       <div className="secret-header">
         <p>ACCESS GRANTED</p>
 
@@ -30,6 +79,7 @@ function SecretPaddock() {
 
         <div className="secret-menu">
           <button
+            type="button"
             className="secret-feature"
             onClick={() => setScreen("podium")}
           >
@@ -37,27 +87,41 @@ function SecretPaddock() {
 
             <div className="feature-text">
               <h2>Build your podium</h2>
-              <p>Pick your dream P1, P2 and P3.</p>
+
+              <p>
+                Pick your dream P1, P2 and P3.
+              </p>
             </div>
           </button>
 
-          <button className="secret-feature">
+          <button
+            type="button"
+            className="secret-feature"
+            onClick={() => setScreen("creator")}
+          >
             <div className="feature-icon">👑</div>
 
-            <div>
-              <h2>Creator's ranking</h2>
+            <div className="feature-text">
+              <h2>Creator&apos;s ranking</h2>
 
-              <p>My completely unbiased opinions.</p>
+              <p>
+                My completely unbiased opinions.
+              </p>
             </div>
           </button>
 
-          <button className="secret-feature">
+          <button
+            type="button"
+            className="secret-feature"
+          >
             <div className="feature-icon">📻</div>
 
-            <div>
+            <div className="feature-text">
               <h2>Morning radio</h2>
 
-              <p>Daily F1 messages and motivation.</p>
+              <p>
+                Daily F1 messages and motivation.
+              </p>
             </div>
           </button>
         </div>
