@@ -2,13 +2,16 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import collage from "../assets/homepage.jpg";
+
 import BuildPodium from "./BuildPodium";
 import CreatorRanking from "./CreatorRanking";
+import MorningRadio from "./MorningRadio";
 
 type SecretScreen =
   | "menu"
   | "podium"
-  | "creator";
+  | "creator"
+  | "radio";
 
 function SecretPaddock() {
   const navigate = useNavigate();
@@ -22,7 +25,9 @@ function SecretPaddock() {
         <button
           type="button"
           className="secret-back"
-          onClick={() => setScreen("menu")}
+          onClick={() =>
+            setScreen("menu")
+          }
         >
           ← Secret Paddock
         </button>
@@ -38,12 +43,26 @@ function SecretPaddock() {
         <button
           type="button"
           className="secret-back"
-          onClick={() => setScreen("menu")}
+          onClick={() =>
+            setScreen("menu")
+          }
         >
           ← Secret Paddock
         </button>
 
         <CreatorRanking />
+      </div>
+    );
+  }
+
+  if (screen === "radio") {
+    return (
+      <div className="secret-feature-screen">
+        <MorningRadio
+          onExit={() =>
+            setScreen("menu")
+          }
+        />
       </div>
     );
   }
@@ -66,7 +85,8 @@ function SecretPaddock() {
         <h1>SECRET PADDOCK</h1>
 
         <p className="secret-subtitle">
-          Everything hidden behind the pit wall.
+          Everything hidden behind the pit
+          wall.
         </p>
       </div>
 
@@ -81,15 +101,20 @@ function SecretPaddock() {
           <button
             type="button"
             className="secret-feature"
-            onClick={() => setScreen("podium")}
+            onClick={() =>
+              setScreen("podium")
+            }
           >
-            <div className="feature-icon">🏆</div>
+            <div className="feature-icon">
+              🏆
+            </div>
 
             <div className="feature-text">
               <h2>Build your podium</h2>
 
               <p>
-                Pick your dream P1, P2 and P3.
+                Pick your dream P1, P2 and
+                P3.
               </p>
             </div>
           </button>
@@ -97,15 +122,22 @@ function SecretPaddock() {
           <button
             type="button"
             className="secret-feature"
-            onClick={() => setScreen("creator")}
+            onClick={() =>
+              setScreen("creator")
+            }
           >
-            <div className="feature-icon">👑</div>
+            <div className="feature-icon">
+              👑
+            </div>
 
             <div className="feature-text">
-              <h2>Creator&apos;s ranking</h2>
+              <h2>
+                Creator&apos;s ranking
+              </h2>
 
               <p>
-                My completely unbiased opinions.
+                My completely unbiased
+                opinions.
               </p>
             </div>
           </button>
@@ -113,14 +145,20 @@ function SecretPaddock() {
           <button
             type="button"
             className="secret-feature"
+            onClick={() =>
+              setScreen("radio")
+            }
           >
-            <div className="feature-icon">📻</div>
+            <div className="feature-icon">
+              📻
+            </div>
 
             <div className="feature-text">
               <h2>Morning radio</h2>
 
               <p>
-                Daily F1 messages and motivation.
+                Daily F1 messages and
+                motivation.
               </p>
             </div>
           </button>
