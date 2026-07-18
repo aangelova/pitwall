@@ -27,8 +27,6 @@ type StatKey =
   | "dnf"
   | "dns"
   | "dsq"
-  | "dnfRate"
-  | "finishRate"
   | "classifiedFinishes";
 
 type StatCategory = "season" | "finishing" | "reliability";
