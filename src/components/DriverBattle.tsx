@@ -39,7 +39,7 @@ function DriverBattle() {
   async function getDrivers(): Promise<OpenF1Driver[]> {
     // 1. Try latest session
     try {
-      const response = await fetch("/openf1/drivers?session_key=latest");
+      const response = await fetch("https://api.openf1.org/v1/drivers?session_key=latest");
 
       if (response.ok) {
         return await response.json();
@@ -47,8 +47,7 @@ function DriverBattle() {
     } catch {}
 
     // 2. Fallback: latest race session of the latest meeting
-    const sessions: OpenF1Session[] = await fetch(
-      "/openf1/sessions?meeting_key=latest&session_type=Race"
+    const sessions: OpenF1Session[] = await fetch("https://api.openf1.org/v1/sessions?meeting_key=latest&session_type=Race"
     ).then((r) => r.json());
 
     if (!sessions.length) {
@@ -57,9 +56,7 @@ function DriverBattle() {
 
     const sessionKey = sessions[sessions.length - 1].session_key;
 
-    const response = await fetch(
-      `/openf1/drivers?session_key=${sessionKey}`
-    );
+    const response = await fetch(`https://api.openf1.org/v1/drivers?session_key=${sessionKey}`);
 
     if (!response.ok) {
       throw new Error("Couldn't load drivers.");

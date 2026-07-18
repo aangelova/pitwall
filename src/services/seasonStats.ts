@@ -19,8 +19,13 @@ export type SeasonDriverStats = {
 };
 
 
-const STANDINGS_URL = "/f1api/api/current/drivers-championship";
-const JOLPICA_BASE = "/jolpica";
+// const STANDINGS_URL = "/f1api/api/current/drivers-championship";
+// const JOLPICA_BASE = "/jolpica";
+const STANDINGS_URL =
+  "https://f1api.dev/api/current/drivers-championship";
+
+const JOLPICA_BASE =
+  "https://api.jolpi.ca/ergast/f1";
 
 const normalize = (value: string) =>
   value.toLowerCase().replaceAll(" ", "").replaceAll("-", "");
