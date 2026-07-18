@@ -8,9 +8,14 @@ function SecretPaddockCard() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
 
+  const [revealPassword, setRevealPassword] =
+    useState(false);
+
   const navigate = useNavigate();
 
-  function handleMove(e: React.MouseEvent<HTMLDivElement>) {
+  function handleMove(
+    e: React.MouseEvent<HTMLDivElement>
+  ) {
     const card = cardRef.current;
     if (!card) return;
 
@@ -19,8 +24,11 @@ function SecretPaddockCard() {
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    const rotateY = ((x / rect.width) - 0.5) * 18;
-    const rotateX = ((y / rect.height) - 0.5) * -18;
+    const rotateY =
+      ((x / rect.width) - 0.5) * 18;
+
+    const rotateX =
+      ((y / rect.height) - 0.5) * -18;
 
     card.style.transform = `
       perspective(900px)
@@ -42,8 +50,18 @@ function SecretPaddockCard() {
       "perspective(900px) rotateX(0deg) rotateY(0deg)";
   }
 
+  function showPassword() {
+    if (revealPassword) return;
+
+    setRevealPassword(true);
+
+    setTimeout(() => {
+      setRevealPassword(false);
+    }, 500);
+  }
+
   function unlock() {
-    if (password === "girlsunite") {
+    if (password === "simplylovely") {
       setError(false);
       setOpen(false);
 
@@ -69,11 +87,30 @@ function SecretPaddockCard() {
       >
         <div className="card-glow" />
 
-        <span>👀</span>
+        <div
+          className="secret-eyes"
+          onDoubleClick={(e) => {
+            e.preventDefault();
+            showPassword();
+          }}
+        >
+          {!revealPassword ? (
+            <span className="eyes">👀</span>
+          ) : (
+            <div className="password-reveal">
+              <strong>simplylovely</strong>
+
+              <small>RADIO CHECK COMPLETE.</small>
+            </div>
+          )}
+        </div>
 
         <h2>Secret Paddock</h2>
 
-        <p>Not everything is visible at first glance...</p>
+        <p>
+          Not everything is visible at first
+          glance...
+        </p>
 
         <button
           className="secret-button"
@@ -92,7 +129,9 @@ function SecretPaddockCard() {
             className={`secret-modal ${
               error ? "secret-error" : ""
             }`}
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) =>
+              e.stopPropagation()
+            }
           >
             <div className="secret-label">
               🔐 PADDOCK ACCESS
@@ -103,19 +142,31 @@ function SecretPaddockCard() {
                 <h2>Restricted Area</h2>
 
                 <p>
-                  Apparently girls only watch Formula 1
-                  for the drivers...
+                  Apparently girls only watch
+                  Formula 1 for the drivers...
                   <br />
-                  Come and have some fun!
+                  Come and have some fun
+                  girlstyle!
                 </p>
+
+                <div className="secret-hint">
+                  <strong>Stuck?</strong>
+
+                  <span>
+                    You're only one
+                    double-click away.
+                  </span>
+                </div>
               </>
             ) : (
               <>
-                <h2 className="toto-no">Toto says no.</h2>
+                <h2 className="toto-no">
+                  Toto says no.
+                </h2>
 
                 <p>
-                  Apparently girls only watch Formula 1
-                  for the drivers...
+                  Apparently girls only watch
+                  Formula 1 for the drivers...
                   <br />
                   Access denied.
                 </p>
@@ -126,9 +177,14 @@ function SecretPaddockCard() {
               type="password"
               placeholder="Password..."
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(e) =>
+                setPassword(
+                  e.target.value
+                )
+              }
               onKeyDown={(e) => {
-                if (e.key === "Enter") unlock();
+                if (e.key === "Enter")
+                  unlock();
               }}
             />
 
