@@ -40,7 +40,7 @@ function HomePage() {
         <FeatureCard
           icon="🏎️"
           title="Track Battle"
-          description="Coming soon — compare Formula 1 circuits by speed, layout, history and racing characteristics."
+          description="Coming soon... compare Formula 1 circuits by speed, layout, history and racing characteristics."
         />
 
         <SecretPaddockCard />
