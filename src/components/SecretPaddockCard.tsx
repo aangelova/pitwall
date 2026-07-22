@@ -1,17 +1,29 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 
 function SecretPaddockCard() {
   const cardRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [open, setOpen] = useState(false);
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
+  const isTouchDevice = window.matchMedia("(hover: none)").matches;
+  const lastTap = useRef(0);
+
 
   const [revealPassword, setRevealPassword] =
     useState(false);
 
   const navigate = useNavigate();
+  useEffect(() => {
+    if (open) {
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 150);
+    }
+  }, [open]);
 
   function handleMove(
     e: React.MouseEvent<HTMLDivElement>
@@ -60,6 +72,21 @@ function SecretPaddockCard() {
     }, 500);
   }
 
+
+  function handleEyesTap(e: React.MouseEvent<HTMLDivElement>) {
+    e.stopPropagation();
+
+    if (!isTouchDevice) return;
+
+    const now = Date.now();
+
+    if (now - lastTap.current < 300) {
+      showPassword();
+    }
+
+    lastTap.current = now;
+  }
+
   function unlock() {
     if (password === "simplylovely") {
       setError(false);
@@ -84,14 +111,24 @@ function SecretPaddockCard() {
         className="card"
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
+        onClick={() => {
+          if (isTouchDevice) {
+            setOpen(true);
+          }
+        }}
       >
         <div className="card-glow" />
 
         <div
           className="secret-eyes"
+          onClick={handleEyesTap}
           onDoubleClick={(e) => {
             e.preventDefault();
-            showPassword();
+            e.stopPropagation();
+
+            if (!isTouchDevice) {
+              showPassword();
+            }
           }}
         >
           {!revealPassword ? (
@@ -112,12 +149,17 @@ function SecretPaddockCard() {
           glance...
         </p>
 
-        <button
-          className="secret-button"
-          onClick={() => setOpen(true)}
-        >
-          🔒 COME AND SEE
-        </button>
+        {!isTouchDevice && (
+          <button
+            className="secret-button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setOpen(true);
+            }}
+          >
+            🔒 COME AND SEE
+          </button>
+        )}
       </div>
 
       {open && (
@@ -174,6 +216,7 @@ function SecretPaddockCard() {
             )}
 
             <input
+              ref={inputRef}
               type="password"
               placeholder="Password..."
               value={password}

@@ -786,79 +786,154 @@
   }
 }
 
-@media (max-width: 700px) {
-  .radio-back {
-    top: 16px;
-    left: 16px;
-    padding: 11px 17px;
-    font-size: 0.82rem;
+
+@media (max-width:700px){
+
+  .radio-back{
+    top:16px;
+    left:16px;
+    padding:11px 17px;
+    font-size:.82rem;
   }
 
-  .radio-header {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 8px;
+  .radio-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:8px;
   }
 
-  .radio-title {
-    letter-spacing: 2px;
+  .radio-title{
+    letter-spacing:2px;
   }
 
-  .radio-message {
-    min-height: 105px;
+  .radio-message{
+    min-height:105px;
   }
 
-  .radio-action {
-    width: 100%;
-    min-width: 0;
+  .radio-action{
+    width:100%;
+    min-width:0;
   }
 
-  .radio-goodbye-drivers {
-    height: 220px;
+  .radio-goodbye{
+    width:min(640px,95vw);
   }
 
-  .radio-goodbye-lando {
-    left: -2%;
+  .radio-goodbye-drivers{
+    height:250px;
   }
 
-  .radio-goodbye-oscar {
-    right: -7%;
+  .radio-goodbye-george{
+    left:55px;
+    height:260px;
   }
 
-  .radio-goodbye-actions button {
-    width: 100%;
-    min-width: 0;
+  .radio-goodbye-oscar{
+    height:285px;
+    bottom:-18px;
+  }
+
+  .radio-goodbye-lando{
+    right:55px;
+    height:245px;
+  }
+
+  .radio-goodbye-actions button{
+    width:100%;
+    min-width:0;
   }
 }
 
-@media (max-height: 700px) and (min-width: 800px) {
-  .radio-page {
-    padding-top: 58px;
+
+@media (max-width:560px){
+
+  .radio-goodbye{
+    width:95vw;
   }
 
-  .radio-container {
-    padding:
-      24px 34px;
+  .radio-goodbye h2{
+    font-size:2.2rem;
   }
 
-  .radio-wave {
-    height: 60px;
-    margin-bottom: 18px;
+  .radio-goodbye>p{
+    font-size:.95rem;
   }
 
-  .radio-message {
-    min-height: 80px;
+  .radio-goodbye-drivers{
+    height:205px;
   }
 
-  .radio-finished {
-    margin-top: 22px;
+  .radio-goodbye-george{
+    left:20px;
+    height:200px;
   }
 
-  .radio-goodbye {
-    width: min(670px, 94vw);
+  .radio-goodbye-oscar{
+    height:225px;
+    bottom:-15px;
   }
 
-  .radio-goodbye-drivers {
-    height: 235px;
+  .radio-goodbye-lando{
+    right:20px;
+    height:190px;
   }
+
+}
+
+
+@media (max-width:420px){
+
+  .radio-goodbye-drivers{
+    height:170px;
+  }
+
+  .radio-goodbye-george{
+    left:13px;
+    height:195px;
+  }
+
+  .radio-goodbye-oscar{
+    height:185px;
+    bottom:-10px;
+  }
+
+  .radio-goodbye-lando{
+    right:15px;
+    height:180px;
+  }
+
+}
+
+
+@media (max-height:700px) and (min-width:800px){
+
+  .radio-page{
+    padding-top:58px;
+  }
+
+  .radio-container{
+    padding:24px 34px;
+  }
+
+  .radio-wave{
+    height:60px;
+    margin-bottom:18px;
+  }
+
+  .radio-message{
+    min-height:80px;
+  }
+
+  .radio-finished{
+    margin-top:22px;
+  }
+
+  .radio-goodbye{
+    width:min(670px,94vw);
+  }
+
+  .radio-goodbye-drivers{
+    height:235px;
+  }
+
 }

@@ -53,6 +53,20 @@ function DriverVsView({
 
   const [loading, setLoading] = useState(true);
 
+  const [isMobile, setIsMobile] = useState(
+    window.innerWidth <= 768
+  );
+
+  useEffect(() => {
+    const handleResize = () =>
+      setIsMobile(window.innerWidth <= 768);
+
+    window.addEventListener("resize", handleResize);
+
+    return () =>
+      window.removeEventListener("resize", handleResize);
+  }, []);
+
   useEffect(() => {
     setLoading(true);
     setRevealedStats([]);
@@ -247,6 +261,164 @@ function DriverVsView({
   );
 
   const allStatsRevealed = revealedStats.length === statKeys.length;
+
+  if (isMobile) {
+    return (
+      <div className="driver-vs-layout">
+        <div className="battle-score">
+          <span style={{ color: driver1Color }}>
+            {driver1Name.split(" ")[0]}
+          </span>
+
+          <div className="score-box">
+            <strong>{score.driver1}</strong>
+            <span>-</span>
+            <strong>{score.driver2}</strong>
+          </div>
+
+          <span style={{ color: driver2Color }}>
+            {driver2Name.split(" ")[0]}
+          </span>
+        </div>
+
+        {allStatsRevealed && (
+          <div className="final-winner">
+            🏆 Final Winner:{" "}
+            {score.driver1 > score.driver2
+              ? driver1Name
+              : score.driver2 > score.driver1
+              ? driver2Name
+              : "Tie"}
+          </div>
+        )}
+
+        <div className="stat-category-tabs">
+          <button
+            className={activeCategory === "season" ? "active" : ""}
+            onClick={() => setActiveCategory("season")}
+          >
+            🏆 Season
+          </button>
+
+          <button
+            className={activeCategory === "finishing" ? "active" : ""}
+            onClick={() => setActiveCategory("finishing")}
+          >
+            🏁 Finishing
+          </button>
+
+          <button
+            className={activeCategory === "reliability" ? "active" : ""}
+            onClick={() => setActiveCategory("reliability")}
+          >
+            ⚙️ Reliability
+          </button>
+        </div>
+
+        <div className="mobile-battle-header">
+
+          <div className="mobile-driver">
+            <img
+              src={driver1Image}
+              alt={driver1Name}
+              className="mobile-driver-image"
+              style={{
+                filter: `drop-shadow(0 0 20px ${driver1Color})`,
+              }}
+            />
+
+            <p
+              className="driver-number"
+              style={{ color: driver1Color }}
+            >
+              #{driver1Number}
+            </p>
+
+            <h3>{driver1Name.split(" ")[0]}</h3>
+
+            <p>{driver1Team}</p>
+          </div>
+
+          <div className="mobile-vs">
+            VS
+          </div>
+
+          <div className="mobile-driver">
+            <img
+              src={driver2Image}
+              alt={driver2Name}
+              className="mobile-driver-image"
+              style={{
+                filter: `drop-shadow(0 0 20px ${driver2Color})`,
+              }}
+            />
+
+            <p
+              className="driver-number"
+              style={{ color: driver2Color }}
+            >
+              #{driver2Number}
+            </p>
+
+            <h3>{driver2Name.split(" ")[0]}</h3>
+
+            <p>{driver2Team}</p>
+          </div>
+
+        </div>
+
+        <div className="active-stat-card">
+          <h3>{activeStat.label}</h3>
+
+          {activeStatRevealed ? (
+            <>
+              <div className="stat-result-row">
+                <span>{activeStat.format(activeStat.d1)}</span>
+                <span>{activeStat.format(activeStat.d2)}</span>
+              </div>
+
+              <p>
+                🏆{" "}
+                {activeWinner === "Driver 1"
+                  ? driver1Name
+                  : activeWinner === "Driver 2"
+                  ? driver2Name
+                  : "Tie"}
+              </p>
+            </>
+          ) : (
+            <p>
+              Choose this stat to reveal the season battle.
+            </p>
+          )}
+        </div>
+
+        <div className="stat-list mobile-stat-list">
+          {statGroups[activeCategory].map((key) => {
+            const isRevealed = revealedStats.includes(key);
+
+            return (
+              <button
+                key={key}
+                className={selectedStat === key ? "stat-pill active" : "stat-pill"}
+                onClick={() => revealStat(key)}
+              >
+                <span>{stats[key].label}</span>
+
+                <strong>
+                  {loading
+                    ? "..."
+                    : isRevealed
+                      ? `${stats[key].format(stats[key].d1)} vs ${stats[key].format(stats[key].d2)}`
+                      : "Tap to reveal"}
+                </strong>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="driver-vs-layout">
